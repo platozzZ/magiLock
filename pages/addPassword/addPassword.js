@@ -1,5 +1,5 @@
 const app = getApp()
-const code = require('../../utils/getCode.js')
+const util = require('../../utils/util.js');
 const api = require('../../utils/request.js')
 import WxValidate from '../../utils/WxValidate'
 Page({
@@ -102,8 +102,14 @@ Page({
         api.request('/dms/device/lock/pwd/info.do', 'POST', data, true).then(res => {
             console.log(res.data)
             if (res.data.rlt_code == 'S_0000') {
+                let data = res.data.data
+
                 that.setData({
-                    mobile: res.data.data.pwd_user_mobile
+                    mobile: res.data.data.pwd_user_mobile,
+                    startDate: util.formatDate(new Date(data.valid_time_start)),
+                    endDate: util.formatDate(new Date(data.valid_time_end)),
+                    startTime: util.formatTime(new Date(data.valid_time_start)),
+                    endTime: util.formatTime(new Date(data.valid_time_end)),
                 })
                 // wx.navigateBack()
             } else {
@@ -167,6 +173,7 @@ Page({
             },
             password: {
                 required: true,
+                rangelength: [6, 10]
             },
             startDate: {
                 required: true,
@@ -188,6 +195,7 @@ Page({
             },
             password: {
                 required: '密码不能为空',
+                rangelength: '请输入6~10位密码'
             },
             startDate: {
                 required: '请选择开始日期',

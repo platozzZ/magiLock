@@ -1,6 +1,5 @@
 const login = require('./wxLogin.js')
 const baseUrl = require('./baseUrl.js')
-console.log(baseUrl)
 //添加事件结束
 Promise.prototype.finally = function (callback) {
   var Promise = this.constructor;

@@ -7,7 +7,6 @@
         "pages/lockDetail/lockDetail",
         "pages/passWord/passWord",
         "pages/lockPassword/lockPassword",
-        "pages/changeLock/changeLock",
         "pages/addPassword/addPassword",
         "pages/openRecord/openRecord"
     ],

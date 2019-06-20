@@ -23,7 +23,9 @@ const wxLogin = (that) => {
   wx.showLoading({
     title: '加载中',
     mask: true
-  })
+    })
+    // console.log(that)
+    // console.log(that.globalData)
   return new Promise((resolve, reject) => {
     wx.login({
       success: res => {
@@ -40,16 +42,16 @@ const wxLogin = (that) => {
               wx.hideLoading()
               console.log(res)
               if (res.statusCode == 200) {
-                    wx.setStorageSync('openid', res.data.data.openid)
                     if (res.data.rlt_code == "S_0000") {
                         wx.setStorageSync('token', res.data.data.access_token)
-                        // wx.reLaunch({
-                        //     url: '',
-                        // })
+                        that.globalData.token = res.data.data.access_token
                         wx.reLaunch({
                             url: '/pages/index/index',
                         })
-                    } else if (res.data.rlt_code == 'DMS_0028'){
+                    } else {
+                        wx.setStorageSync('openid', res.data.data.openid)
+                        that.globalData.open_id = res.data.data.openid
+                        // console.log(that.globalData)
                         wx.reLaunch({
                             url: '/pages/login/login',
                         })

@@ -2,14 +2,10 @@ const login = require('./utils/wxLogin.js')
 App({
   onLaunch: function () {
       let that = this
-      login.wxLogin()
+      login.wxLogin(that)
       wx.onNetworkStatusChange(res => {
           let isConnected = res.isConnected
           let networkType = res.networkType
-          console.log(isConnected)
-          console.log(networkType)
-          that.globalData.isConnected = isConnected
-          that.globalData.networkType = networkType
           if (!isConnected || networkType == 'none') {
               wx.showToast({
                   title: '网络连接错误',

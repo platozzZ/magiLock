@@ -11,7 +11,12 @@ Page({
     onLoad: function (options) {
         let that = this
         that.initValidate()
-
+        // let storageOpenid = wx.getStorageSync('openid')
+        // let globalOpenid = app.globalData.open_id
+        // console.log('that.checkOpenid(storageOpenid):', that.checkOpenid(storageOpenid))
+        // console.log('that.checkOpenid(globalOpenid):', that.checkOpenid(globalOpenid))
+        // that.checkOpenid(storageOpenid)
+        // that.checkOpenid(globalOpenid)
     },
     formSubmit(e){
         console.log(e)
@@ -29,11 +34,13 @@ Page({
 
     },
     login(e){
+        console.log(app)
         let that = this
         console.log(e)
-        let openid = wx.getStorageSync('openid')
+        let storageOpenid = wx.getStorageSync('openid')
+        let globalOpenid = app.globalData.open_id
         let data = e
-        data.openid = openid
+        data.openid = that.checkOpenid(storageOpenid) ? storageOpenid : globalOpenid
         console.log(data)
         api.request('/dms/system/miniapp/login', 'POST', data).then(res => {
             console.log(res)
@@ -56,6 +63,13 @@ Page({
 
         }).finally(() => { })
     },
+    checkOpenid(e) {
+        if (e == 0 || e == undefined || e == null || e == false || e == '') {
+            return false
+        } else {
+            return true
+        }
+    },
     showToast(e) {
         wx.showToast({
             title: e,
@@ -72,6 +86,7 @@ Page({
             },
             password: {
                 required: true,
+                rangelength: [6,10]
             },
         }
         const messages = {
@@ -81,6 +96,7 @@ Page({
             },
             password: {
                 required: '密码不能为空',
+                rangelength: '请输入6~10位密码'
             }
         }
         // 创建实例对象

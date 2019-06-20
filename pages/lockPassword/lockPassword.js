@@ -72,7 +72,9 @@ Page({
             }
         }).catch(res => {
 
-        }).finally(() => { })
+        }).finally(() => { 
+            wx.stopPullDownRefresh()
+        })
     },
     // getOffline(e) {
     //     let that = this
@@ -160,7 +162,7 @@ Page({
         this.getList(this.data.lockId)
     },
     onPullDownRefresh: function () {
-
+        this.getList(this.data.lockId)
     },
     onReachBottom: function () {
 

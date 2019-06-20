@@ -12,6 +12,9 @@ Page({
     },
     onLoad: function (options) {
         let that = this
+        // let storageOpenid = wx.getStorageSync('openid')
+        // let globalOpenid = app.globalData.open_id
+        // console.log(that.checkOpenid(storageOpenid) ? storageOpenid : globalOpenid)
         that.initValidate()
         console.log(options)
         wx.setNavigationBarTitle({
@@ -25,21 +28,28 @@ Page({
         console.log(e)
         let that = this
         let time = that.data.second//获取最初的秒数
-        let data = { mobile: e.currentTarget.dataset.mobile }
+        let data = { mobile: that.data.mobile }
+        console.log(that.isPhone(that.data.mobile))
         console.log(data)
-        api.request('/sms/verify_code', 'POST', data).then(res => {
-            console.log(res)
-            if (res.data.rlt_code == 'S_0000') {
-                code.getCode(that, time);　　//调用倒计时函数
-                wx.showToast({
-                    title: '短信发送成功',
-                })
-            } else {
-                that.showToast(res.data.rlt_msg)
-            }
-        }).catch(res => {
+        if (!that.isPhone(that.data.mobile)){
+            that.showToast('请正确输入手机号')
+        } else {
+            api.request('/sms/verify_code', 'POST', data).then(res => {
+                console.log(res)
+                if (res.data.rlt_code == 'S_0000') {
+                    code.getCode(that, time);　　//调用倒计时函数
+                    wx.showToast({
+                        title: '短信发送成功',
+                    })
+                } else if (res.data.rlt_code == 'SMS_0001'){
+                    that.showToast('请正确输入手机号')
+                } else {
+                    that.showToast(res.data.rlt_msg)
+                }
+            }).catch(res => {
 
-        }).finally(() => { })
+            }).finally(() => { })
+        }
     }, 
     mobileInput(e){
         // console.log(e.detail)
@@ -91,7 +101,7 @@ Page({
         let data = e
         console.log(data)
         api.request('/dms/system/user/forget_password', 'POST', data).then(res => {
-            console.log('forget:',res)
+            console.log('forget:',res.data)
             if (res.data.rlt_code == 'S_0000') {
                 console.log(data)
                 that.login(data)
@@ -107,14 +117,16 @@ Page({
     login(e) {
         let that = this
         console.log(e)
-        let openid = wx.getStorageSync('openid')
+        let storageOpenid = wx.getStorageSync('openid')
+        let globalOpenid = app.globalData.open_id
         let data = e
-        data.openid = openid
+        data.openid = that.checkOpenid(storageOpenid) ? storageOpenid : globalOpenid
         console.log(data)
         api.request('/dms/system/miniapp/login', 'POST', data).then(res => {
-            console.log(res)
+            console.log('login:',res.data)
             if (res.data.rlt_code == 'S_0000') {
                 wx.setStorageSync('token', res.data.data.access_token)
+                app.globalData.token = res.data.data.access_token
                 wx.showToast({
                     title: '登录成功',
                     success(res) {
@@ -145,6 +157,22 @@ Page({
             showPw: !this.data.showPw
         })
     },
+    checkOpenid(e) {
+        if (e == 0 || e == undefined || e == null || e == false || e == '') {
+            return false
+        } else {
+            return true
+        }
+    },
+    isPhone(phone) {
+        // var myreg = /^[1][3,4,5,7,8][0-9]{9}$/;
+        let myreg = /^([1][3,5,6,7,8,9])\d{9}$/
+        if (!myreg.test(phone)) {
+            return false;
+        } else {
+            return true;
+        }
+    },
     initValidate() {
         // 验证字段的规则
         const rules = {
@@ -157,6 +185,7 @@ Page({
             },
             password: {
                 required: true,
+                rangelength: [6, 10]
             },
             // renew_password: {
             //     required: true,
@@ -173,6 +202,7 @@ Page({
             },
             password: {
                 required: '密码不能为空',
+                rangelength: '请输入6~10位密码'
             }
         }
         // 创建实例对象
