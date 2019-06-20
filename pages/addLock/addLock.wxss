@@ -1,0 +1,10 @@
+.addLock{
+    background: #fff;
+}
+.addLock .input{
+    border: 1rpx solid #eee;
+}
+.addLock .input input{
+    height: 30px;
+    line-height: 30px;
+}

@@ -1,0 +1,9 @@
+<view class='card addLock'>
+    <view class='login-input-cell'>
+        <view class='label'>设备编号</view>
+        <view class='input'><input name="mobile"></input></view>
+    </view>
+</view>
+<view class='card'>
+    <button class="weui-btn" type="primary">确定添加</button>
+</view>

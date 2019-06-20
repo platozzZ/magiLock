@@ -1,0 +1,4 @@
+<view class="card record" wx:for="{{list}}" wx:key="{{item.id}}">
+    <view>{{item.user_mobile}}</view>
+    <view>{{item.createTime}}</view>
+</view>

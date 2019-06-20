@@ -1,0 +1,35 @@
+<view class="index-container" wx:if='{{showContainer}}'>
+    <view class='setup'>
+        <image src='/images/setUp.png' mode='widthFix' bindtap='bindLayout'></image>
+    </view>
+    <view class='index'>
+        <block wx:for="{{lockList}}" wx:key="{{item.id}}">
+            <view class='card'>
+                <navigator url="../lockDetail/lockDetail?title={{item.lock_no}}&id={{item.id}}" class="weui-media-box weui-media-box_appmsg" hover-class="weui-cell_active">
+                    <image class="weui-media-box__thumb" mode='widthFix' src="/images/lock.png" />
+                    <view class="weui-media-box__bd weui-media-box__bd_in-appmsg">
+                        <view class="weui-media-box__title">{{item.lock_no}}</view>
+                        <view class="weui-media-box__info">
+                            <view class="weui-media-box__info__meta">
+                                <view>
+                                    <image src="/images/battery-{{item.power == '0'?'0':item.power > 0&&item.power<=25?'1':item.power>25&&item.power<=50?'2':item.power>50&&item.power<=75?'3':item.power>75?'4':''}}.png" mode='widthFix'></image>
+                                    <!-- <image src='/images/battery-1.png' mode='widthFix'></image>
+                                    <image src='/images/battery-2.png' mode='widthFix'></image>
+                                    <image src='/images/battery-3.png' mode='widthFix'></image>
+                                    <image src='/images/battery-4.png' mode='widthFix'></image> -->
+                                </view>
+                                <view>{{item.power}}%</view>
+                            </view>
+                            <view class="weui-media-box__info__meta">
+                                <view><image src='/images/{{item.lockStatus == "0"? "online":"offline"}}.png' mode='widthFix' class='wifi'></image></view>
+                                <view>{{item.lockStatus_text}}</view>
+                            </view>
+                        </view>
+                    </view>
+                </navigator>
+            </view>
+        </block>
+    </view>
+    <!-- <navigator url="../addLock/addLock" class='btn-bottom btn-add'>添加设备</navigator> -->
+</view>
+<!-- <navigator class="add-facility" url='../addaddress/addaddress?addstatus={{addressStatus}}' wx:if="{{showBtn}}">添加设备</navigator> -->

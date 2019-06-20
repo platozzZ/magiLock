@@ -1,0 +1,29 @@
+<form bindsubmit="formSubmit">
+    <view class="login-container">
+        <view class="logo"><image src='/images/logo.png' mode='widthFix'></image></view>
+        <view class='login-input'>
+            <view class='login-input-cell'>
+                <view class='label'>手机号</view>
+                <view class='input'><input type='number' name="mobile" maxlength='11' placeholder='请输入手机号'></input></view>
+            </view>
+            <view class='login-input-cell'>
+                <view class='label'>密码</view>
+                <view class='input'><input type='password' name="password" placeholder='请输入密码'></input></view>
+            </view>
+            <!-- <view class='login-input-cell'>
+                <view class='label'>验证码</view>
+                <view class='input'><input name="reg"></input></view>
+                <button class='weui-btn btn-code' disabled='{{reg}}' bindtap='getCode'>
+                    <text wx:if="{{!reg}}">获取验证码</text>
+                    <text wx:else>{{second}}S</text>
+                </button>
+            </view> -->
+            <navigator url='../passWord/passWord?status=找回密码' class='forgetPass'>忘记密码</navigator>
+            <view class='login-input-cell' style='margin-top: 20px;'>
+                <button class="weui-btn" type="primary" form-type="submit">登录</button>
+            </view>
+            <view class='register'>还没有账号?<navigator url='../passWord/passWord?status=注册' class=''>立即注册</navigator></view>
+            
+        </view>
+    </view>
+</form>

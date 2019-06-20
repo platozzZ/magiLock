@@ -1,0 +1,38 @@
+<view class='container'>
+    <view class='scroll'>
+        <view class="card detail">
+            <view class='detail-image flex'>
+                <image src='/images/lock.png' mode='widthFix'></image>
+            </view>
+            <view class='detail-info flex'>
+                <view>
+                    <view>
+                        <image src="/images/battery-{{art.power == 0? '0' : art.power > 0 && art.power <= 25?'1' : art.power > 25 && art.power <= 50?'2' : art.power > 50 && art.power <= 75?'3' : art.power > 75 ? '4':'0'}}.png" mode='widthFix'></image>
+                    </view>
+                    <view>{{art.power}}%</view>
+                </view>
+                <view>
+                    <view>
+                        <image src='/images/{{art.lockStatus == "0"? "online":"offline"}}.png' mode='widthFix' class='wifi'></image>
+                    </view>
+                    <view>{{art.lockStatus_text}}</view>
+                </view>
+                <view>
+                    <view><image src="/images/{{art.magnet_status == '1'?'suo-open':art.magnet_status == '2'?'suo':art.magnet_status == '3'?'suo-warning':'suo-warning'}}.png" mode='widthFix'></image></view>
+                    <view>{{art.magnet_status == '1'?'门已开':art.magnet_status == '2'?'门已关':art.magnet_status == '3'?'门虚掩':'未上报'}}</view>
+                </view>
+            </view>
+            <view class='detail-btn flex'>
+                <navigator url='../lockPassword/lockPassword?title={{title}}&id={{lockId}}' class='detail-btn-btn'>密码</navigator>
+                <navigator url='../openRecord/openRecord?title={{title}}&id={{lockId}}' class='detail-btn-btn'>开门记录</navigator>
+            </view>
+        </view>
+        <view class='weui-cells__title'>网关信息</view>
+        <view class='card detail'>
+            <view class='gateway'>编号：{{art.gateway_no}}</view>
+            <!-- <view class='gateway'>版本号：V 2.0.01</view> -->
+            <view class='gateway'>状态：<image src='/images/{{art.gateway_comu_status == "00"? "online":"offline"}}.png' mode='widthFix'></image>{{art.gateway_comu_status == "00"? "在线":"离线"}}</view>
+        </view>
+    </view>
+    <!-- <view class='btn-bottom btn-delete' bindtap='deteleLock'>删除门锁</view> -->
+</view>

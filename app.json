@@ -1,0 +1,21 @@
+{
+    "pages": [
+        "pages/homePage/homePage",
+        "pages/index/index",
+        "pages/login/login",
+        "pages/addLock/addLock",
+        "pages/lockDetail/lockDetail",
+        "pages/passWord/passWord",
+        "pages/lockPassword/lockPassword",
+        "pages/changeLock/changeLock",
+        "pages/addPassword/addPassword",
+        "pages/openRecord/openRecord"
+    ],
+    "window": {
+        "backgroundTextStyle": "light",
+        "navigationBarBackgroundColor": "#fff",
+        "navigationBarTitleText": "",
+        "navigationBarTextStyle": "black"
+    },
+    "sitemapLocation": "sitemap.json"
+}
