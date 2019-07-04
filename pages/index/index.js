@@ -86,7 +86,7 @@ Page({
             console.log(res)
             if (res.data.rlt_code == 'S_0000') {
                 wx.showToast({
-                    title: '',
+                    title: '退出成功',
                     success(res) {
                         setTimeout(function () {
                             wx.reLaunch({
@@ -125,6 +125,16 @@ Page({
         }
     },
     onShareAppMessage: function () {
-
+      console.log(options)
+      return {
+        title: '麦极智能锁管理平台',
+        path: "/pages/homePage/homePage",
+        success: function (res) {
+          console.log('onShareAppMessage  success:',res)
+        },
+        fail: function (res) {
+          console.log('onShareAppMessage  fail:', res)
+        }
+      }
     }
 })

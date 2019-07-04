@@ -86,7 +86,7 @@ Page({
             },
             password: {
                 required: true,
-                rangelength: [6,10]
+                rangelength: [6,16]
             },
         }
         const messages = {
@@ -96,7 +96,7 @@ Page({
             },
             password: {
                 required: '密码不能为空',
-                rangelength: '请输入6~10位密码'
+                rangelength: '请输入6~16位密码'
             }
         }
         // 创建实例对象

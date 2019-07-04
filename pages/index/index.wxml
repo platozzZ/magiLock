@@ -1,4 +1,4 @@
-<view class="index-container" wx:if='{{showContainer}}'>
+<view class="index-container">
     <view class='setup'>
         <image src='/images/setUp.png' mode='widthFix' bindtap='bindLayout'></image>
     </view>

@@ -75,8 +75,5 @@ Page({
         if (that.data.total_page >= that.data.curPage){
             that.getList(that.data.lockId)
         }
-    },
-    onShareAppMessage: function () {
-
     }
 })

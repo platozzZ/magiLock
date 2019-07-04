@@ -32,7 +32,7 @@ const request = (url, method, data,tokens) => {
           token = wx.getStorageSync('token')
       }
     // let token = wx.getStorageSync('token')
-    // console.log(token)
+    console.log(token)
     wx.request({
       url: baseUrl + url,
       data: data,

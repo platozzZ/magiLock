@@ -8,7 +8,7 @@
             </view>
             <view class='login-input-cell'>
                 <view class='label'>密码</view>
-                <view class='input'><input type='password' name="password" placeholder='请输入密码'></input></view>
+                <view class='input'><input type='password' maxlength='16' name="password" placeholder='请输入密码'></input></view>
             </view>
             <!-- <view class='login-input-cell'>
                 <view class='label'>验证码</view>

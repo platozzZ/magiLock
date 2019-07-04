@@ -8,6 +8,7 @@ Page({
         second: 120,
         status: '',
         showPw: false,
+        pwdValue: '',
         mobile: ''
     },
     onLoad: function (options) {
@@ -157,6 +158,12 @@ Page({
             showPw: !this.data.showPw
         })
     },
+    bindInput(e){
+        console.log(e)
+        this.setData({
+            pwdValue: e.detail.value
+        })
+    },
     checkOpenid(e) {
         if (e == 0 || e == undefined || e == null || e == false || e == '') {
             return false
@@ -185,7 +192,7 @@ Page({
             },
             password: {
                 required: true,
-                rangelength: [6, 10]
+                rangelength: [6, 16]
             },
             // renew_password: {
             //     required: true,
@@ -202,7 +209,7 @@ Page({
             },
             password: {
                 required: '密码不能为空',
-                rangelength: '请输入6~10位密码'
+                rangelength: '请输入6~16位密码'
             }
         }
         // 创建实例对象

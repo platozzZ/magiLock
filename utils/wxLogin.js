@@ -24,7 +24,7 @@ const wxLogin = (that) => {
     title: '加载中',
     mask: true
     })
-    // console.log(that)
+    console.log(that)
     // console.log(that.globalData)
   return new Promise((resolve, reject) => {
     wx.login({
@@ -49,18 +49,18 @@ const wxLogin = (that) => {
                             url: '/pages/index/index',
                         })
                     } else {
+                        wx.reLaunch({
+                          url: '/pages/login/login',
+                        })
                         wx.setStorageSync('openid', res.data.data.openid)
                         that.globalData.open_id = res.data.data.openid
                         // console.log(that.globalData)
-                        wx.reLaunch({
-                            url: '/pages/login/login',
-                        })
                     }
                 resolve(res); //返回成功提示信息
               } else {
-                  wx.reLaunch({
-                      url: '/pages/login/login',
-                  })
+                wx.reLaunch({
+                    url: '/pages/login/login',
+                })
                 reject(res.data.rlt_msg); //返回错误提示信息
                 wx.showToast({
                   title: res.data.rlt_msg,
