@@ -2,9 +2,10 @@ const app = getApp()
 const api = require('../../utils/request.js')
 Page({
     data: {
-        art: '',
-        lockId: '',
-        title: ''
+      art: '',
+      lockId: '',
+      title: '',
+      addModal: false
     },
 
     onLoad(options) {
@@ -70,5 +71,16 @@ Page({
                 }
             }
         })
-    }
+    },
+
+  showAddModal(e) {
+    that.setData({
+      addModal: true
+    })
+  },
+  hideAddModal(e) {
+    that.setData({
+      addModal: false
+    })
+  },
 })

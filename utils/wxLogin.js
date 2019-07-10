@@ -20,13 +20,13 @@ Promise.prototype.finally = function (callback) {
   );
 }
 const wxLogin = (that) => {
-  wx.showLoading({
-    title: '加载中',
-    mask: true
-    })
-    console.log(that)
+  console.log('wxLogin-that:',that)
     // console.log(that.globalData)
   return new Promise((resolve, reject) => {
+    wx.showLoading({
+      title: '加载中',
+      mask: true
+    })
     wx.login({
       success: res => {
         if (res.code) {
@@ -39,23 +39,24 @@ const wxLogin = (that) => {
               'content-type': 'application/json',
             },
             success: function (res) {
-              wx.hideLoading()
-              console.log(res)
+              // that.globalData.isFirst = false
+              console.log('wxLogin:',res)
               if (res.statusCode == 200) {
-                    if (res.data.rlt_code == "S_0000") {
-                        wx.setStorageSync('token', res.data.data.access_token)
-                        that.globalData.token = res.data.data.access_token
-                        wx.reLaunch({
-                            url: '/pages/index/index',
-                        })
-                    } else {
-                        wx.reLaunch({
-                          url: '/pages/login/login',
-                        })
-                        wx.setStorageSync('openid', res.data.data.openid)
-                        that.globalData.open_id = res.data.data.openid
-                        // console.log(that.globalData)
-                    }
+                if (res.data.rlt_code == "S_0000") {
+                  wx.setStorageSync('token', res.data.data.access_token)
+                  that.globalData.token = res.data.data.access_token
+                  wx.reLaunch({
+                      url: '/pages/index/index',
+                  })
+                } else {
+                  wx.reLaunch({
+                    url: '/pages/login/login',
+                  })
+                  wx.setStorageSync('openid', res.data.data.openid)
+                  that.globalData.open_id = res.data.data.openid
+                  // console.log(that.globalData)
+                }
+                wx.hideLoading()
                 resolve(res); //返回成功提示信息
               } else {
                 wx.reLaunch({

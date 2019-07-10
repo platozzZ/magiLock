@@ -2,16 +2,22 @@ const app = getApp()
 const api = require('../../utils/request.js')
 Page({
     data: {
-        lockList: [],
-        curPage: 1,
-        pageSize: 20,
-        total_page: '',
-        showContainer: true,
-        showBtn: false,
+      lockList: [],
+      curPage: 1,
+      pageSize: 20,
+      total_page: '',
+      showContainer: true,
+      showBtn: false,
+      showContainer: false,
+      hideContainer: false
     },
     onLoad: function (options) {
-        let that = this
+      let that = this
+      // let isFirst = app.globalData.isFirst
+      // console.log('isFirst:', isFirst)
+      // if (!isFirst) {
         that.getList()
+      // }
     },
     getList(e){
         let that = this
@@ -20,7 +26,7 @@ Page({
             page_size: that.data.pageSize,
         }
         api.request('/dms/device/lock/list.do', 'POST', data, true).then(res => {
-            console.log(res.data)
+          console.log('getList:',res.data)
             if (res.data.rlt_code == 'S_0000' ) {
                 if (res.data.data.rows) {
                     let datas = res.data.data.rows
@@ -40,18 +46,25 @@ Page({
                         }
                     })
                     that.setData({
-                        lockList: list,
-                        curPage: res.data.data.current_page + 1
+                      lockList: list,
+                      curPage: res.data.data.current_page + 1,
+                      showContainer: true,
+                      hideContainer: false
                     })
+                } else {
+                  that.setData({
+                    showContainer: false,
+                    hideContainer: true
+                  })
                 }
                 that.setData({
                     total_page: res.data.data.total_page
                 })
             } else {
-                that.showToast(res.data.rlt_msg)
+              // that.showToast(res.data.rlt_msg)
             }
         }).catch(res => {
-
+          // that.showToast(res.data.rlt_msg)
         }).finally(() => {
             wx.stopPullDownRefresh()
         })
@@ -88,6 +101,7 @@ Page({
                 wx.showToast({
                     title: '退出成功',
                     success(res) {
+                        wx.clearStorageSync('token')
                         setTimeout(function () {
                             wx.reLaunch({
                                 url: '../login/login',

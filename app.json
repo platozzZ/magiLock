@@ -1,14 +1,14 @@
 {
     "pages": [
-        "pages/homePage/homePage",
-        "pages/index/index",
-        "pages/login/login",
-        "pages/addLock/addLock",
-        "pages/lockDetail/lockDetail",
-        "pages/passWord/passWord",
-        "pages/lockPassword/lockPassword",
-        "pages/addPassword/addPassword",
-        "pages/openRecord/openRecord"
+      "pages/homePage/homePage",
+      "pages/index/index",
+      "pages/login/login",
+      "pages/addLock/addLock",
+      "pages/lockDetail/lockDetail",
+      "pages/passWord/passWord",
+      "pages/lockPassword/lockPassword",
+      "pages/addPassword/addPassword",
+      "pages/openRecord/openRecord"
     ],
     "window": {
         "backgroundTextStyle": "light",
@@ -16,5 +16,10 @@
         "navigationBarTitleText": "",
         "navigationBarTextStyle": "black"
     },
+    "networkTimeout": {
+      "request": 10000,
+      "downloadFile": 10000
+    },
+    "debug": true,
     "sitemapLocation": "sitemap.json"
 }

@@ -1,8 +1,10 @@
 const login = require('./utils/wxLogin.js')
+
 App({
   onLaunch: function () {
-      let that = this
-      login.wxLogin(that)
+    console.log('app onLaunch')
+    let that = this
+      // login.wxLogin(that)
       wx.onNetworkStatusChange(res => {
           let isConnected = res.isConnected
           let networkType = res.networkType
@@ -49,9 +51,11 @@ App({
           })
       }
   },
+  onShow(){
+    // login.wxLogin(this)
+  },
   globalData: {
-      token: null,
-      open_id: null,
-      userInfo: null,
+    token: null,
+    open_id: null,
   }
 })

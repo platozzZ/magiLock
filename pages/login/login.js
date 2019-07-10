@@ -5,18 +5,12 @@ import WxValidate from '../../utils/WxValidate'
 Page({
     data: {
         reg: false,
-        second: 10
+        second: 10,
     },
 
     onLoad: function (options) {
         let that = this
         that.initValidate()
-        // let storageOpenid = wx.getStorageSync('openid')
-        // let globalOpenid = app.globalData.open_id
-        // console.log('that.checkOpenid(storageOpenid):', that.checkOpenid(storageOpenid))
-        // console.log('that.checkOpenid(globalOpenid):', that.checkOpenid(globalOpenid))
-        // that.checkOpenid(storageOpenid)
-        // that.checkOpenid(globalOpenid)
     },
     formSubmit(e){
         console.log(e)

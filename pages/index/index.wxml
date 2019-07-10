@@ -2,7 +2,7 @@
     <view class='setup'>
         <image src='/images/setUp.png' mode='widthFix' bindtap='bindLayout'></image>
     </view>
-    <view class='index'>
+    <view class='index' wx:if="{{showContainer}}">
         <block wx:for="{{lockList}}" wx:key="{{item.id}}">
             <view class='card'>
                 <navigator url="../lockDetail/lockDetail?title={{item.lock_no}}&id={{item.id}}" class="weui-media-box weui-media-box_appmsg" hover-class="weui-cell_active">
@@ -30,6 +30,9 @@
             </view>
         </block>
     </view>
+    <view class="emptyContainer" wx:if="{{hideContainer}}">
+      <view class=''>您还没有关联设备</view>
+      <view class=''>请联系麦极客服为您添加设备</view>
+    </view>
     <!-- <navigator url="../addLock/addLock" class='btn-bottom btn-add'>添加设备</navigator> -->
 </view>
-<!-- <navigator class="add-facility" url='../addaddress/addaddress?addstatus={{addressStatus}}' wx:if="{{showBtn}}">添加设备</navigator> -->

@@ -14,6 +14,7 @@
 .weui-media-box__thumb{
     width: 50px;
     margin-right: 10px;
+    height: auto;
 }
 .weui-media-box__info{
     margin: 0;
@@ -28,6 +29,7 @@
 .weui-media-box__info__meta view image{
     vertical-align:middle;
     width: 20px;
+    height: auto;
 }
 .add-facility{
     width: 150px;
@@ -62,4 +64,21 @@
 .index{
     padding-top: 30px;
     height: calc(100vh - 30px);
+}
+
+
+.emptyContainer{
+  position: fixed;
+  top: 50%;
+  left: 0;
+  text-align: center;
+  width: 100%;
+  transform: translateY(-50%);
+  -webkit-transform: translateY(-50%);
+  font-size: 14px;
+  /* display: flex;
+  display: -webkit-flex;
+  flex-direction: column;
+  justify-content:center;
+  align-items: center; */
 }
