@@ -34,12 +34,15 @@ page{
   justify-content: center;
 }
 .detail-name image{
-  width: 20px;
-  height: 20px;
+  width: 18px;
+  height: 28px;
   margin-left: 8px;
 }
+.detail-name text{
+  color: #353535;
+}
 .detail-info{
-    width: 150px;
+    width: 190px;
     margin: 0 auto;
 }
 .detail-info>view{
@@ -131,7 +134,7 @@ page{
   margin-right: auto;
   width: 680rpx;
   max-width: 100%;
-  background: #f8f8f8;
+  background: #fff;
   border-radius: 10rpx;
   overflow: hidden;
 }
@@ -176,4 +179,51 @@ page{
 
 .cu-modal.drawer-modal.show .cu-dialog {
   transform: translateX(0%);
+}
+
+
+.cu-btn{
+  border-radius: 4rpx;
+}
+.cu-btn::after, .action .cu-btn::after{
+  border-radius: 4rpx!important;
+}
+.cu-dialog{
+  /* width: 500rpx; */
+  border-radius: 4rpx;
+  background: #fff;
+}
+.cu-dialog .cu-bar .action{
+  width: 100%;
+  padding: 0 40rpx;
+  margin: 0;
+}
+.cu-dialog .cu-bar .action .cu-btn{
+  flex: 1;
+  border-radius: 4rpx;
+  height: 70rpx;
+  margin-bottom: 40rpx;
+}
+.modal-input{
+  display: flex;
+  align-items: center;
+  text-align: left;
+  padding: 0 20rpx;
+  border: 1rpx solid rgb(206,206,206);
+  border-radius: 4rpx;
+  margin: 0 auto 40rpx;
+  background: rgb(249 ,249 ,249);
+  height: 70rpx;
+  font-size: 28rpx;
+}
+.modal-input image{
+  width: 30rpx;
+  height: 30rpx;
+  margin: 0 20rpx;
+}
+.modal-input input{
+  flex: 1;
+}
+.modal-input.only{
+  margin-bottom: 0
 }

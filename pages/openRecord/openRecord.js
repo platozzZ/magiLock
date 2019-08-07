@@ -63,6 +63,15 @@ Page({
             wx.stopPullDownRefresh()
          })
     },
+
+  showToast(e) {
+    wx.showToast({
+      title: e,
+      icon: 'none',
+      mask: true,
+      duration: 2000
+    })
+  },
     onPullDownRefresh: function () {
         this.setData({
             curPage: 1

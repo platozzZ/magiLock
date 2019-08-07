@@ -22,7 +22,7 @@ Promise.prototype.finally = function (callback) {
   );
 }
 const request = (url, method, data,tokens) => {
-  console.log('request-app:',app)
+  // console.log('request-app:',app)
 //   console.log(data)
   return new Promise((resolve, reject) => {
     wx.showLoading({
@@ -34,7 +34,7 @@ const request = (url, method, data,tokens) => {
           token = wx.getStorageSync('token')
       }
     // let token = wx.getStorageSync('token')
-    console.log('token:',token)
+    // console.log('token:',token)
     wx.request({
       url: baseUrl + url,
       data: data,
@@ -44,24 +44,25 @@ const request = (url, method, data,tokens) => {
         'access_token': token
       },
       success: function (res) {
-        console.log('request:',res)
+        wx.hideLoading()
+        // console.log('request:',res)
         if (res.statusCode == 200) {
-          if (res.data.rlt_code != 'S_0000'){
+          if (res.data.rlt_code == 'E_0003' || res.data.rlt_code == 'E_0002'){
             console.log("res.data.rlt_code != 'S_0000'")
             login.wxLogin(app)//
             // app.onLaunch()
             wx.showToast({
               title: '请求失败，请刷新重试',
-              icon: 'none'
+              icon: 'none',
+              duration: 2000
             })
           }
           resolve(res); //返回成功提示信息
         } else {
           reject(res.data.rlt_msg); //返回错误提示信息
         }
-        setTimeout(function () {
-          wx.hideLoading()
-        }, 500)
+        // setTimeout(function () {
+        // }, 500)
       },
       fail: function (res) {
         wx.hideLoading()

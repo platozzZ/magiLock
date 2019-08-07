@@ -68,7 +68,8 @@ Page({
         wx.showToast({
             title: e,
             icon: 'none',
-            mask: true
+            mask: true,
+            duration: 2000
         })
     },
     initValidate() {

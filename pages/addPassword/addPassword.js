@@ -67,6 +67,10 @@ Page({
         api.request('/dms/device/lock/pwd/add.do', 'POST', data,true).then(res => {
             console.log(res.data)
             if (res.data.rlt_code == 'S_0000') {
+              wx.showToast({
+                title: '',
+                icon: 'success'
+              })
                 wx.navigateBack()
             } else {
                 that.showToast(res.data.rlt_msg)
@@ -123,7 +127,8 @@ Page({
         wx.showToast({
             title: e,
             icon: 'none',
-            mask: true
+            mask: true,
+            duration: 2000
         })
     },
     createCode() {

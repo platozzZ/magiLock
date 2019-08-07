@@ -5,6 +5,7 @@ Page({
 
     },
     onLoad: function (options) {
+      console.log('homePage-onLoad')
       login.wxLogin(app)
     },
     onReady: function () {

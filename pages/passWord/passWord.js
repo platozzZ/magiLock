@@ -40,7 +40,8 @@ Page({
                 if (res.data.rlt_code == 'S_0000') {
                     code.getCode(that, time);　　//调用倒计时函数
                     wx.showToast({
-                        title: '短信发送成功',
+                      title: '短信发送成功',
+                      duration: 2000
                     })
                 } else if (res.data.rlt_code == 'SMS_0001'){
                     that.showToast('请正确输入手机号')

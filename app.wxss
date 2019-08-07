@@ -1,4 +1,5 @@
 @import 'style/weui.wxss';
+@import "/style/colorui.wxss";
 page{
     box-sizing: border-box;
     background: #f1f1f1;
@@ -70,3 +71,17 @@ form{
     background: #014099;
     color: #fff;
 }
+.text-magi,
+.line-magi,
+.lines-magi {
+	color: #004098;
+}
+.bg-gradual-magi{
+  background-image:linear-gradient(45deg, #004098, #247af1);
+  color: #fff;
+}
+.bg-magi {
+    background-color: #004098;
+    color: #ffffff;
+}
+

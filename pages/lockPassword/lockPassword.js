@@ -76,6 +76,15 @@ Page({
             wx.stopPullDownRefresh()
         })
     },
+
+  showToast(e) {
+    wx.showToast({
+      title: e,
+      icon: 'none',
+      mask: true,
+      duration: 2000
+    })
+  },
     // getOffline(e) {
     //     let that = this
     //     that.setData({
@@ -126,13 +135,16 @@ Page({
     },
     handleDetele(e) {
         let that = this
-        console.log(e)
+      console.log(e)
         let id = e.currentTarget.dataset.id
-        let lockId = e.currentTarget.dataset.lockid
+      let lockId = e.currentTarget.dataset.lockid
+      console.log(id)
+      console.log(lockId)
         let data = {
             lock_id: lockId,
             pwd_id: id
         }
+        console.log(data)
         wx.showModal({
             title: '删除密码',
             content: '确认删除？',

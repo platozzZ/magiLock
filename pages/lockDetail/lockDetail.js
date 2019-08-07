@@ -1,32 +1,32 @@
 const app = getApp()
 const api = require('../../utils/request.js')
+var that
 Page({
     data: {
       art: '',
       lockId: '',
-      title: '',
-      addModal: false
+      showEditModal: false,
+      lockName: ''
     },
 
     onLoad(options) {
         console.log(options)
-        let that = this
-        wx.setNavigationBarTitle({
-            title: options.title,
-        })
-        this.setData({
+        that = this
+        that.setData({
             lockId: options.id,
-            title: options.title
         })
         that.getLock(options.id)
     },
     getLock(e){ //
-        let that = this
-        let data = { lock_id: e,}
-        api.request('/dms/device/lock/info.do', 'POST', data, true).then(res => {
-            console.log(res)
-            if (res.data.rlt_code == 'S_0000') {
-                let data = res.data.data
+        let datas = { lock_id: e,}
+        console.log(e)
+        api.request('/dms/device/lock/info.do', 'POST', datas, true).then(res => {
+          console.log('getLock:',res.data)
+          if (res.data.rlt_code == 'S_0000') {
+            let data = res.data.data
+            wx.setNavigationBarTitle({
+              title: data.lock_name,
+            })
                 if (data.comu_status == '00' && data.gateway_comu_status == '00') {
                     data.lockStatus = '0'
                     data.lockStatus_text = '在线'
@@ -36,7 +36,8 @@ Page({
                 }
                 console.log(data)
                 that.setData({
-                    art: data
+                    art: data,
+                  lockName: data.lock_name
                 })
                 // if (res.data.data.rows) {
                 //     console.log(res.data.data.rows)
@@ -61,6 +62,62 @@ Page({
 
         }).finally(() => { })
     },
+  lockName(e){
+    that.setData({
+      lockName: e.detail.value
+    })
+  },
+  showEditModal(e){
+    that.setData({
+      showEditModal: true
+    })
+  },
+
+  hideEditModal(e) {
+    that.setData({
+      showEditModal: false,
+    })
+  },
+  editSubmit(e){
+    let data = e.detail.value
+    console.log(data)
+    if (!!data.lock_name && !!data.lock_id){
+      that.editName(data)
+    } else {
+      that.showToast('请输入门锁名称')
+    }
+  },
+  editName(e){
+    let data = e
+    api.request('/dms/device/lock/update_name.do', 'POST', data, true).then(res => {
+      console.log('editName:',res.data)
+      if (res.data.rlt_code == 'S_0000') {
+        that.hideEditModal()
+        wx.showToast({
+          title: '更新成功',
+          icon: 'success',
+          duration: 2000,
+          success(res){
+            setTimeout(function () {
+              that.getLock(that.data.lockId)
+            },2000)
+          }
+        })
+      } else {
+        that.showToast(res.data.rlt_msg)
+      }
+    }).catch(res => {
+
+    }).finally(() => { })
+  },
+    showToast(e) {
+      wx.showToast({
+        title: e,
+        icon: 'none',
+        mask: true,
+        duration: 2000
+      })
+    },
     deteleLock(e){
         wx.showModal({
             title: '提示',
@@ -73,14 +130,4 @@ Page({
         })
     },
 
-  showAddModal(e) {
-    that.setData({
-      addModal: true
-    })
-  },
-  hideAddModal(e) {
-    that.setData({
-      addModal: false
-    })
-  },
 })

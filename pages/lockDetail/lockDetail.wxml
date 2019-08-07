@@ -4,10 +4,10 @@
             <view class='detail-image flex'>
                 <image src='/images/lock.png' mode='widthFix'></image>
             </view>
-            <!-- <view class='detail-name flex'>
-              <text>设置门锁名称</text>
+            <view class='detail-name flex' bindtap="showEditModal">
+              <text>{{art.lock_name}}</text>
               <image src='/images/change.png' mode="widthFix"></image>
-            </view> -->
+            </view>
             <view class='detail-info flex'>
                 <view>
                     <view>
@@ -41,18 +41,24 @@
     <!-- <view class='btn-bottom btn-delete' bindtap='deteleLock'>删除门锁</view> -->
 </view>
 
-<view class="cu-modal {{addModal?'show':''}}" >
-  <view class="cu-dialog">
-    <view class="cu-bar bg-white">
-      <view class="content">添加途家账号</view>
+<view class="cu-modal {{showEditModal?'show':''}}" >
+  <form bindsubmit="editSubmit">
+    <view class="cu-dialog">
+      <view class="cu-bar bg-white solid-bottom">
+        <view class="content">修改门锁名称</view>
+      </view>
+      <view class="padding-lg">
+        <view class='modal-input only'>
+          <input placeholder='请输入门锁名称' maxlength="15" bindinput='lockName' name="lock_name" value='{{lockName}}'></input>
+        </view>
+        <input name="lock_id" hidden='true' value='{{art.id}}'></input>
+      </view>
+      <view class="cu-bar bg-white addModal justify-center">
+        <view class="action">
+          <button class="cu-btn line-magi" bindtap='hideEditModal'>取消</button>
+          <button class="cu-btn bg-magi margin-left" form-type="submit">保存</button>
+        </view>
+      </view>
     </view>
-    <view class="padding-xl">
-      <input placeholder='请输入账号' class='modal-input'></input>
-      <input placeholder='请输入密码' class='modal-input'></input>
-    </view>
-    <view class="cu-bar bg-white">
-      <view class="flex-sub text-lg" bindtap='hideAddModal'>取消</view>
-      <view class="flex-sub text-magi text-lg solid-left" bindtap='hideAddModal'>确定</view>
-    </view>
-  </view>
+  </form>
 </view>

@@ -5,10 +5,10 @@
     <view class='index' wx:if="{{showContainer}}">
         <block wx:for="{{lockList}}" wx:key="{{item.id}}">
             <view class='card'>
-                <navigator url="../lockDetail/lockDetail?title={{item.lock_no}}&id={{item.id}}" class="weui-media-box weui-media-box_appmsg" hover-class="weui-cell_active">
+                <navigator url="../lockDetail/lockDetail?title={{item.lock_name}}&id={{item.id}}" class="weui-media-box weui-media-box_appmsg" hover-class="weui-cell_active">
                     <image class="weui-media-box__thumb" mode='widthFix' src="/images/lock.png" />
                     <view class="weui-media-box__bd weui-media-box__bd_in-appmsg">
-                        <view class="weui-media-box__title">{{item.lock_no}}</view>
+                        <view class="weui-media-box__title">{{item.lock_name}}</view>
                         <view class="weui-media-box__info">
                             <view class="weui-media-box__info__meta">
                                 <view>

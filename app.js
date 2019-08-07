@@ -11,7 +11,8 @@ App({
           if (!isConnected || networkType == 'none') {
               wx.showToast({
                   title: '网络连接错误',
-                  image: '/images/fail.svg'
+                image: '/images/fail.svg',
+                duration: 2000
               })
           }
       })

@@ -65,7 +65,8 @@ const wxLogin = (that) => {
                 reject(res.data.rlt_msg); //返回错误提示信息
                 wx.showToast({
                   title: res.data.rlt_msg,
-                  icon: 'none'
+                  icon: 'none',
+                  duration: 2000
                 })
               }
             },
